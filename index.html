@@ -60,6 +60,15 @@
   var loadBar  = document.getElementById("loadBar");
   var scroller = document.getElementById("scroller");
 
+  // dimmed backdrop used to fill the side pillars on wide/desktop screens
+  var bgImg = new Image(); var bgReady = false;
+  bgImg.onload = function(){ bgReady = true; if (ready) drawFrame(currentFrame < 0 ? 0 : currentFrame, true); };
+  bgImg.src = "bg.jpg";
+
+  // offscreen buffer for feathering the poster's side edges
+  var off = document.createElement("canvas");
+  var offctx = off.getContext("2d");
+
   var images = new Array(FRAME_COUNT);
   var loaded = 0;
   var currentFrame = -1;
@@ -75,11 +84,21 @@
   // how far down the visible poster the fade begins / reaches full black
   var FADE_START = 0.62;   // 0..1 of the on-screen poster height
   var FADE_END   = 0.96;
+  var SIDE_FADE  = 0.16;   // width of the left/right black fade (fraction of poster width)
 
-  // Top-aligned reveal:
-  //  • poster scaled to fill the full WIDTH, so the whole title is visible (no side crop)
+  function coverRect(iw, ih, cw, ch){
+    var s = Math.max(cw / iw, ch / ih);
+    var w = iw * s, h = ih * s;
+    return { x:(cw - w) / 2, y:(ch - h) / 2, w:w, h:h };
+  }
+
+  // Top-aligned reveal (same treatment on every screen):
+  //  • "contain" scale: fills the WIDTH on narrow phones, fits the HEIGHT on
+  //    wide desktops (so it never over-zooms) — one rule via Math.min
   //  • anchored at y = 0, so the top of the poster always meets the top of the screen
-  //  • the lower portion dissolves into black for a "mystery" teaser, hiding the cut-off edge
+  //  • on wide screens the side pillars are filled with a dimmed blue-ball
+  //    backdrop, and the poster's edges feather into it
+  //  • the lower portion dissolves into black for a "mystery" teaser
   function drawFit(img){
     var cw = canvas.width, ch = canvas.height;
     var iw = img.naturalWidth, ih = img.naturalHeight;
@@ -88,17 +107,45 @@
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, cw, ch);
 
-    var scale = cw / iw;          // fill width
-    var h = ih * scale;           // drawn height (top-anchored)
-    ctx.drawImage(img, 0, 0, cw, h);
+    var scale = Math.min(cw / iw, ch / ih);
+    var w = iw * scale, h = ih * scale;
+    var x = (cw - w) / 2;
+    var hasPillars = x >= 1;
 
-    // black gradient fading the bottom of the visible poster into darkness
-    var edge = Math.min(h, ch);   // where the poster meets black (or screen bottom)
-    var g = ctx.createLinearGradient(0, edge * FADE_START, 0, edge * FADE_END);
+    // 1) backdrop on the side pillars: blue-ball texture, cover + dimmed back
+    if (hasPillars && bgReady){
+      var b = coverRect(bgImg.naturalWidth, bgImg.naturalHeight, cw, ch);
+      ctx.drawImage(bgImg, b.x, b.y, b.w, b.h);
+      ctx.fillStyle = "rgba(0,0,0,0.66)";   // fade it back / hide it
+      ctx.fillRect(0, 0, cw, ch);
+    }
+
+    // 2) the poster (top-anchored). On wide screens, feather the side edges
+    //    via an offscreen buffer so the poster melts into the backdrop.
+    if (hasPillars){
+      if (off.width !== cw || off.height !== ch){ off.width = cw; off.height = ch; }
+      else offctx.clearRect(0, 0, cw, ch);
+      offctx.drawImage(img, x, 0, w, h);
+      offctx.globalCompositeOperation = "destination-out";
+      var sw = w * SIDE_FADE, gl, gr;
+      gl = offctx.createLinearGradient(x, 0, x + sw, 0);
+      gl.addColorStop(0, "rgba(0,0,0,1)"); gl.addColorStop(1, "rgba(0,0,0,0)");
+      offctx.fillStyle = gl; offctx.fillRect(x, 0, sw, h);
+      gr = offctx.createLinearGradient(x + w - sw, 0, x + w, 0);
+      gr.addColorStop(0, "rgba(0,0,0,0)"); gr.addColorStop(1, "rgba(0,0,0,1)");
+      offctx.fillStyle = gr; offctx.fillRect(x + w - sw, 0, sw, h);
+      offctx.globalCompositeOperation = "source-over";
+      ctx.drawImage(off, 0, 0);
+    } else {
+      ctx.drawImage(img, x, 0, w, h);
+    }
+
+    // 3) black gradient fading the bottom of the poster into darkness
+    var g = ctx.createLinearGradient(0, h * FADE_START, 0, h * FADE_END);
     g.addColorStop(0, "rgba(0,0,0,0)");
     g.addColorStop(1, "rgba(0,0,0,1)");
     ctx.fillStyle = g;
-    ctx.fillRect(0, edge * FADE_START, cw, ch - edge * FADE_START);
+    ctx.fillRect(0, h * FADE_START, cw, ch - h * FADE_START);
   }
 
   function drawFrame(i, force){
