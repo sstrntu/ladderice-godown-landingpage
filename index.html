@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>ไนกี้ โกลดัง — NIKE GOAL-DANG</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  /* Lock the page: the document itself never scrolls, so the mobile browser
+     toolbar never collapses and the viewport height stays constant. */
+  html,body{ height:100%; overflow:hidden; background:#000;
+    overscroll-behavior:none; -webkit-text-size-adjust:100%; }
+
+  /* fixed canvas — always fills the (now stable) viewport */
+  #seq-canvas{
+    position:fixed; inset:0; z-index:0;
+    width:100%; height:100%;
+    display:block; background:#000;
+  }
+  /* the ONLY thing that scrolls is this inner layer */
+  #scroller{
+    position:fixed; inset:0; z-index:1;
+    overflow-y:scroll; overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  /* tall spacer inside the scroller = the scroll track */
+  #spacer{ height:480vh; pointer-events:none; }
+
+  /* minimal loader */
+  #loader{
+    position:fixed; inset:0; z-index:10;
+    display:flex; align-items:center; justify-content:center;
+    background:#060a1e;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  #loader.hidden{ opacity:0; visibility:hidden; }
+  .load-track{ width:min(220px,56vw); height:2px; background:rgba(255,255,255,.14); overflow:hidden; }
+  .load-bar{ height:100%; width:0%; background:#d8f50c; transition:width .2s linear; }
+</style>
+</head>
+<body>
+
+  <canvas id="seq-canvas"></canvas>
+  <div id="scroller"><div id="spacer"></div></div>
+
+  <div id="loader">
+    <div class="load-track"><div class="load-bar" id="loadBar"></div></div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  var FRAME_COUNT = 151;
+  var PATH = function(i){ return "frames/ezgif-frame-" + String(i).padStart(3,"0") + ".jpg"; };
+
+  var canvas   = document.getElementById("seq-canvas");
+  var ctx      = canvas.getContext("2d", { alpha:false });
+  var loader   = document.getElementById("loader");
+  var loadBar  = document.getElementById("loadBar");
+  var scroller = document.getElementById("scroller");
+
+  var images = new Array(FRAME_COUNT);
+  var loaded = 0;
+  var currentFrame = -1;
+  var ready = false;
+
+  function sizeCanvas(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width  = Math.round(canvas.clientWidth  * dpr);
+    canvas.height = Math.round(canvas.clientHeight * dpr);
+    if (ready) drawFrame(currentFrame < 0 ? 0 : currentFrame, true);
+  }
+
+  // how far down the visible poster the fade begins / reaches full black
+  var FADE_START = 0.62;   // 0..1 of the on-screen poster height
+  var FADE_END   = 0.96;
+
+  // Top-aligned reveal:
+  //  • poster scaled to fill the full WIDTH, so the whole title is visible (no side crop)
+  //  • anchored at y = 0, so the top of the poster always meets the top of the screen
+  //  • the lower portion dissolves into black for a "mystery" teaser, hiding the cut-off edge
+  function drawFit(img){
+    var cw = canvas.width, ch = canvas.height;
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    if (!iw || !ih) return;
+
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, cw, ch);
+
+    var scale = cw / iw;          // fill width
+    var h = ih * scale;           // drawn height (top-anchored)
+    ctx.drawImage(img, 0, 0, cw, h);
+
+    // black gradient fading the bottom of the visible poster into darkness
+    var edge = Math.min(h, ch);   // where the poster meets black (or screen bottom)
+    var g = ctx.createLinearGradient(0, edge * FADE_START, 0, edge * FADE_END);
+    g.addColorStop(0, "rgba(0,0,0,0)");
+    g.addColorStop(1, "rgba(0,0,0,1)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, edge * FADE_START, cw, ch - edge * FADE_START);
+  }
+
+  function drawFrame(i, force){
+    i = Math.max(0, Math.min(FRAME_COUNT - 1, i));
+    if (i === currentFrame && !force) return;
+    var img = images[i];
+    if (img && img.complete && img.naturalWidth){ drawFit(img); currentFrame = i; }
+  }
+
+  function preload(){
+    for (var i = 0; i < FRAME_COUNT; i++){
+      (function(idx){
+        var img = new Image();
+        img.decoding = "async";
+        img.onload = img.onerror = function(){
+          loaded++;
+          loadBar.style.width = Math.round(loaded / FRAME_COUNT * 100) + "%";
+          if (idx === 0){ sizeCanvas(); drawFrame(0, true); }
+          if (loaded === FRAME_COUNT) onReady();
+        };
+        img.src = PATH(idx + 1);
+        images[idx] = img;
+      })(i);
+    }
+  }
+
+  function onReady(){
+    ready = true;
+    loader.classList.add("hidden");
+    sizeCanvas();
+    update();
+  }
+
+  var ticking = false;
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  function update(){
+    ticking = false;
+    var total = scroller.scrollHeight - scroller.clientHeight;
+    var y = scroller.scrollTop;
+    var progress = total > 0 ? Math.max(0, Math.min(1, y / total)) : 0;
+    drawFrame(Math.round(progress * (FRAME_COUNT - 1)));
+  }
+
+  scroller.addEventListener("scroll", onScroll, { passive:true });
+  window.addEventListener("resize", function(){ sizeCanvas(); onScroll(); });
+  window.addEventListener("orientationchange", function(){ setTimeout(function(){ sizeCanvas(); onScroll(); }, 250); });
+
+  sizeCanvas();
+  preload();
+})();
+</script>
+</body>
+</html>
