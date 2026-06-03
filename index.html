@@ -113,9 +113,17 @@
   h2.head em{ font-style:normal; color:var(--volt); }
   .sub{ margin-top:16px; font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:12px;
     letter-spacing:.2em; line-height:1.5; color:var(--muted); text-transform:uppercase; }
-  .copy{ margin-top:26px; max-width:58ch; font-size:14px; line-height:1.72; letter-spacing:.004em;
-    color:rgba(243,239,228,.76); text-wrap:pretty; }
+  .copy{ margin-top:26px; margin-left:0; margin-right:auto; max-width:58ch; font-size:14px; line-height:1.72;
+    letter-spacing:.004em; text-align:left; color:rgba(243,239,228,.76); text-wrap:pretty; }
   .copy + .copy{ margin-top:18px; }
+  .copylist{ margin-top:18px; margin-left:0; margin-right:auto; max-width:58ch; padding-left:20px;
+    text-align:left; color:rgba(243,239,228,.76); }
+  .copylist li{ margin-top:10px; font-size:14px; line-height:1.72; letter-spacing:.004em; }
+  .copylist li::marker{ color:var(--volt); }
+  @media(min-width:960px){
+    .wrap{ padding:0 32px; }
+    .copy, .copylist{ max-width:54ch; }
+  }
   .ph{ color:var(--volt); opacity:.9; font-weight:500; } /* placeholder marker */
 
   /* image placeholder boxes */
@@ -198,8 +206,8 @@
                  alt="The PLAY ART HOUSE facade — a blue Song Wat shophouse with ทรงวาด โกลดัง signage and hand-woven plaid awnings on a Bangkok street." />
             <figcaption><b>PLAY ART HOUSE</b> · ทรงวาด โกลดัง — the GOAL-DANG art house on Song Wat</figcaption>
           </figure>
-          <p class="copy"><span class="ph">[ Placeholder — concept idea ]</span> A one-line manifesto for NIKE GOAL-DANG goes here: what the project is, the feeling it chases, and why it exists. Two or three sentences that frame the whole experience for a first-time visitor.</p>
-          <p class="copy">Expand the concept: the idea of rebuilding the football from hand-woven street cloth, turning the beautiful game into an art object. Replace this block with the final approved copy (EN / TH).</p>
+          <p class="copy">Nike GO-DANG reimagines the warehouse as a cultural playground - where the energy of Song Wat meets the spirit of football. Inspired by the workers, traders, and fans who shape the neighborhood, it blends Thai heritage, street style, and football culture into a shared experience of movement, creativity, and community.</p>
+          <p class="copy">A tribute to the people of Song Wat. A celebration of football beyond the pitch.</p>
         </div>
       </section>
 
@@ -209,7 +217,9 @@
           <div class="kicker"><span class="num">02</span> Origin <span class="ln"></span></div>
           <h2 class="head">Why <em>“Goal-dang”</em>?</h2>
           <div class="sub">The history of Song Wat · ประวัติย่านทรงวาด</div>
-          <p class="copy"><span class="ph">[ Placeholder — the history of Song Wat ]</span> Tell the story of the Song Wat neighbourhood: its trading roots, the craft, the community, and how that heritage connects to the name “Goal-dang.” A short, evocative history — 2–4 paragraphs.</p>
+          <p class="copy">Football culture doesn’t only live in stadiums. It lives in the everyday routines of the people who wear jerseys to work, stay up all night to watch matches, and carry their passion for the game into their daily lives.</p>
+          <p class="copy">Song Wat has always been a place of movement - goods, people, and ideas passing through its warehouses and trading houses. Today, that same spirit can be found in football culture: communities connected by shared rituals, hard work, and identity.</p>
+          <p class="copy">GO-DANG brings these two worlds together. By transforming the warehouse into a cultural stage, Nike celebrates the people behind the game and the neighborhood that continues to move Bangkok forward.</p>
           <div class="grid2">
             <div class="imgph">Image — old Song Wat<small>replace with photo</small></div>
             <div class="imgph">Image — street detail<small>replace with photo</small></div>
@@ -223,7 +233,15 @@
           <div class="kicker"><span class="num">03</span> Location <span class="ln"></span></div>
           <h2 class="head">The <em>location</em></h2>
           <div class="sub">Play Art House · Song Wat, Bangkok</div>
-          <p class="copy"><span class="ph">[ Placeholder — venue intro ]</span> A few lines about Play Art House and how to find it, parking / BTS-MRT directions, and what to expect when you arrive.</p>
+          <p class="copy">Set inside the historic warehouse district of Song Wat, Nike GO-DANG takes over the iconic PLAY art house - a creative space surrounded by galleries, cafes, traders, and the people who continue to shape the neighborhood’s culture.</p>
+          <p class="copy">Just minutes from MRT Wat Mangkon and Ratchawong Pier, the venue is easily accessible while remaining deeply connected to the spirit of Song Wat: a place built on movement, exchange, and community. Address: 993 Song Wat Road, Samphanthawong, Bangkok 10100</p>
+          <p class="copy"><b>Getting There</b></p>
+          <ul class="copylist">
+            <li>MRT Blue Line: Wat Mangkon Station (Exit 1), approximately 5-10 minutes on foot</li>
+            <li>Chao Phraya Express Boat: Ratchawong Pier, approximately 5 minutes on foot</li>
+            <li>Taxi / Grab: Search "PLAY Art House Song Wat"</li>
+            <li>Parking is available in nearby Song Wat and Yaowarat parking areas.</li>
+          </ul>
           <figure class="mapfig">
             <img src="godown-fashionwalk3.png" width="1529" height="1028" loading="lazy" decoding="async"
                  alt="Map of Song Wat showing PLAY ART HOUSE and the GOAL-DANG fashion-walk stops along Song Wat Rd, by the Chao Phraya River." />
