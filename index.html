@@ -124,6 +124,16 @@
     display:flex; align-items:center; justify-content:center; min-height:200px; color:var(--muted);
     font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.28em; text-transform:uppercase; text-align:center; padding:16px; }
   .imgph small{ display:block; margin-top:6px; opacity:.6; letter-spacing:.12em; }
+
+  /* content image figures (facade, map, etc.) */
+  .fig, .mapfig{ margin-top:28px; border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; background:#0a1430; box-shadow:0 18px 50px rgba(0,0,0,.45); }
+  .mapfig{ border-color:rgba(216,245,12,.22); }
+  .fig img, .mapfig img{ display:block; width:100%; height:auto; }
+  .fig figcaption, .mapfig figcaption{ padding:13px 16px; border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.04em; line-height:1.55;
+    text-transform:uppercase; color:var(--muted); }
+  .fig figcaption b, .mapfig figcaption b{ color:var(--volt); font-weight:600; }
   .grid2{ display:grid; grid-template-columns:1fr; gap:12px; margin-top:28px; }
   @media(min-width:620px){ .grid2{ grid-template-columns:1fr 1fr; } .grid2 .span{ grid-column:1 / -1; } }
 
@@ -183,6 +193,11 @@
           <div class="kicker"><span class="num">01</span> About <span class="ln"></span></div>
           <h2 class="head">What is <em>ไนกี้ โกลดัง</em>?</h2>
           <div class="sub">Concept idea</div>
+          <figure class="fig">
+            <img src="facade.png" width="1920" height="1080" loading="lazy" decoding="async"
+                 alt="The PLAY ART HOUSE facade — a blue Song Wat shophouse with ทรงวาด โกลดัง signage and hand-woven plaid awnings on a Bangkok street." />
+            <figcaption><b>PLAY ART HOUSE</b> · ทรงวาด โกลดัง — the GOAL-DANG art house on Song Wat</figcaption>
+          </figure>
           <p class="copy"><span class="ph">[ Placeholder — concept idea ]</span> A one-line manifesto for NIKE GOAL-DANG goes here: what the project is, the feeling it chases, and why it exists. Two or three sentences that frame the whole experience for a first-time visitor.</p>
           <p class="copy">Expand the concept: the idea of rebuilding the football from hand-woven street cloth, turning the beautiful game into an art object. Replace this block with the final approved copy (EN / TH).</p>
         </div>
@@ -209,9 +224,11 @@
           <h2 class="head">The <em>location</em></h2>
           <div class="sub">Play Art House · Song Wat, Bangkok</div>
           <p class="copy"><span class="ph">[ Placeholder — venue intro ]</span> A few lines about Play Art House and how to find it, parking / BTS-MRT directions, and what to expect when you arrive.</p>
-          <div class="grid2">
-            <div class="imgph span" style="min-height:240px">Map — Play Art House, Song Wat<small>embed Google Map here</small></div>
-          </div>
+          <figure class="mapfig">
+            <img src="godown-fashionwalk3.png" width="1529" height="1028" loading="lazy" decoding="async"
+                 alt="Map of Song Wat showing PLAY ART HOUSE and the GOAL-DANG fashion-walk stops along Song Wat Rd, by the Chao Phraya River." />
+            <figcaption>Song Wat Rd · the <b>fashion-walk</b> route &amp; stops, anchored at <b>PLAY ART HOUSE</b></figcaption>
+          </figure>
           <div class="meta-row">
             <span>Venue&nbsp; <b>Play Art House</b></span>
             <span>Area&nbsp; <b>Song Wat, Bangkok</b></span>
