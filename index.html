@@ -150,7 +150,22 @@
   .item .tag{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:10px; letter-spacing:.24em;
     text-transform:uppercase; color:var(--ink); background:var(--volt); padding:6px 12px; border-radius:100px; margin-bottom:16px; }
   .item h3{ font-family:"B2 Kimleng",sans-serif; font-weight:700; font-size:clamp(22px,5.8vw,28px); color:var(--cream); line-height:1.16; letter-spacing:-.005em; }
+  .item h3 .th{ color:var(--muted); font-weight:500; }
   .item .copy{ margin-top:18px; }
+  .fig.dark{ background:#000; }
+
+  /* jersey-customization carousel (full-bleed, auto-scrolling marquee) */
+  .jersey-carousel{ position:relative; left:50%; transform:translateX(-50%);
+    width:100vw; margin:30px 0 4px; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
+  .jersey-track{ display:flex; gap:16px; width:max-content; padding:0 8px; will-change:transform;
+    animation:jslide 70s linear infinite; }
+  .jcard{ flex:0 0 auto; width:clamp(280px,82vw,520px); background:#f3efe4; border-radius:14px;
+    overflow:hidden; border:1px solid rgba(0,0,0,.12); box-shadow:0 16px 40px rgba(0,0,0,.45); }
+  .jcard img{ display:block; width:100%; height:auto; }
+  @keyframes jslide{ from{ transform:translateX(0); } to{ transform:translateX(calc(-50% - 8px)); } }
+  @media(prefers-reduced-motion:reduce){ .jersey-track{ animation:none; } }
 
   /* the blank/black "protagonist" teaser piece */
   .finale{ position:relative; margin-top:18px; border:1px solid rgba(216,245,12,.28); border-radius:14px;
@@ -171,6 +186,18 @@
   .sched .what b{ font-family:"B2 Kimleng",sans-serif; font-weight:700; color:var(--cream); font-size:18px; line-height:1.2; display:block; }
   .sched .what span{ display:block; margin-top:4px; font-size:12.5px; line-height:1.5; color:var(--muted); }
   .sched .time{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.04em; color:var(--muted); white-space:nowrap; }
+
+  /* special-workshop list */
+  .specials{ list-style:none; margin-top:24px; border-top:1px solid var(--line); }
+  .specials li{ padding:18px 0; border-bottom:1px solid var(--line); }
+  .sp-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+  .sp-head b{ font-family:"B2 Kimleng",sans-serif; font-weight:700; font-size:18px; line-height:1.2; color:var(--cream); }
+  .sp-head span{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--volt); white-space:nowrap; }
+  .sp-times{ display:flex; flex-wrap:wrap; gap:7px 18px; margin-top:11px;
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.02em; color:var(--muted); }
+  .sp-times span{ white-space:nowrap; }
+  .sp-fig{ margin-top:16px; }
 
   /* location meta */
   .meta-row{ display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:26px;
@@ -260,62 +287,95 @@
         <div class="wrap">
           <div class="kicker"><span class="num">04</span> Exhibition <span class="ln"></span></div>
           <h2 class="head">What’s <em>inside</em>?</h2>
-          <div class="sub">Protagonist piece · Workshop · Special workshop</div>
+          <div class="sub">Protagonist pieces · Workshop · Special workshop</div>
 
-          <!-- Protagonist piece (blank/black teaser) -->
-          <!--
-            DIRECTION (from brief): ถ้ามีเพลง ใส่เพลงลิซ่าเพื่อ hype แล้วผลงานสุดท้าย
-            คือของลิซ่า แต่เป็น blank หรือสีดำไว้ เพื่อให้คนตามมาดู
-            → keep the hero/finale piece BLANK / BLACK on the site to tease;
-              the real reveal happens only at the event. Optional Lisa track to hype.
-          -->
+          <!-- Protagonist piece -->
           <div class="item">
             <span class="tag">Protagonist piece</span>
-            <h3>The finale — kept in the dark.</h3>
-            <div class="finale">
-              <div class="q">?</div>
-              <div class="lock">Unveiled only at GOAL-DANG</div>
-              <p class="note"><span class="ph">[ Intentionally blank ]</span> The hero piece stays hidden here to pull visitors to the show. Swap in the teaser (or audio) when ready.</p>
-            </div>
+            <h3>Copper Renew <span class="th">· โลหะหมุนเวียน</span></h3>
+            <figure class="fig dark">
+              <img src="protagonist.png" width="1225" height="1667" loading="lazy" decoding="async"
+                   alt="Copper Renew — a hand-woven scrap-copper winged armor bearing the Nike Swoosh, displayed on a black mannequin." />
+              <figcaption>Copper Renew — <b>Teerapol “Jame” Sisung</b></figcaption>
+            </figure>
+            <p class="copy">Scrap copper — stripped wire, motor windings, pipe — hand-woven and coiled into a winged chest-and-abdomen armor bearing the Swoosh, channelling the Winged Victory of Samothrace.</p>
+            <p class="copy">A circular-economy manifesto: victory isn’t found in new resources, but in seeing worth in what’s been thrown away — proof that even scrap can fight, and be reborn as something beautiful and strong.</p>
           </div>
 
-          <!-- Workshop -->
+          <!-- Protagonist piece — Ladderice -->
           <div class="item">
-            <span class="tag">Workshop</span>
-            <h3>Hands-on workshops</h3>
-            <p class="copy"><span class="ph">[ Placeholder — workshop details ]</span> รายละเอียดว่ามีอะไรบ้าง — list each workshop, what participants make, materials, duration, skill level, and price. Add beautiful imagery (ภาพสวยๆ) below.</p>
-            <div class="grid2">
-              <div class="imgph">Image — workshop 1<small>replace with photo</small></div>
-              <div class="imgph">Image — workshop 2<small>replace with photo</small></div>
-              <div class="imgph">Image — workshop 3<small>replace with photo</small></div>
-              <div class="imgph">Image — workshop 4<small>replace with photo</small></div>
+            <span class="tag">Protagonist piece</span>
+            <h3>Ladderice</h3>
+            <figure class="fig">
+              <img src="ladderice-piece.jpg" width="1122" height="1402" loading="lazy" decoding="async"
+                   alt="A speed suit pieced from shredded Nike football boots and Thai silk — a patchwork of Mercurial threads, club crests and woven textile." />
+              <figcaption>Prototype speed suit — <b>Ladderice</b></figcaption>
+            </figure>
+            <p class="copy">A speed suit — biker leathers reimagined — pieced from shredded Nike boots across the eras (OG Mercurial through the 2022 Hypervenom) and stitched with world-renowned Thai silk.</p>
+            <p class="copy">Every World Cup Thailand misses, another Nike innovation is piled on: heavy to look at, yet light to wear — the nation’s dream carried toward 2030. Break the curse, and there shall be consequences.</p>
+          </div>
+
+          <!-- Workshop: always-on jersey customization -->
+          <div class="item">
+            <span class="tag">Workshop · Always-on</span>
+            <h3>Jersey customization</h3>
+            <div class="sub">Drop-in · 8 people / hour · runs all day · subject to change</div>
+            <p class="copy">Drop in and make a football jersey your own — heat-transfer prints of Thai graffiti, names, numbers and motifs laid over iconic national kits. A look at the sample designs from the Song Wat Goal-dang studio:</p>
+            <div class="jersey-carousel" aria-label="Jersey customization sample designs">
+              <div class="jersey-track">
+                <figure class="jcard"><img src="jersey-01.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 1 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-02.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 2 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-03.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 3 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-04.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 4 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-05.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 5 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-06.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 6 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-07.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 7 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-08.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 8 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-09.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 9 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-10.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 10 — front and back" /></figure>
+                <figure class="jcard"><img src="jersey-11.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="Sample jersey design 11 — front and back" /></figure>
+                <!-- duplicate set for a seamless loop -->
+                <figure class="jcard" aria-hidden="true"><img src="jersey-01.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-02.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-03.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-04.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-05.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-06.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-07.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-08.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-09.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-10.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+                <figure class="jcard" aria-hidden="true"><img src="jersey-11.jpg" width="1100" height="550" loading="lazy" decoding="async" alt="" /></figure>
+              </div>
             </div>
           </div>
 
           <!-- Special workshop -->
           <div class="item">
             <span class="tag">Special workshop</span>
-            <h3>Special workshop</h3>
-            <p class="copy"><span class="ph">[ Placeholder — special workshop ]</span> The headline / limited-seat session: guest host, what makes it special, date, and how to register.</p>
-            <div class="grid2">
-              <div class="imgph span" style="min-height:220px">Image — special workshop<small>replace with photo</small></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 05 -->
-      <section class="block">
-        <div class="wrap">
-          <div class="kicker"><span class="num">05</span> Schedule <span class="ln"></span></div>
-          <h2 class="head">Workshop <em>schedule</em></h2>
-          <div class="sub">June 11–21 · subject to change</div>
-          <div class="sched">
-            <div class="row"><span class="day">Jun 11</span><span class="what"><b>[ Workshop name ]</b><span>placeholder description</span></span><span class="time">00:00–00:00</span></div>
-            <div class="row"><span class="day">Jun 13</span><span class="what"><b>[ Workshop name ]</b><span>placeholder description</span></span><span class="time">00:00–00:00</span></div>
-            <div class="row"><span class="day">Jun 15</span><span class="what"><b>[ Workshop name ]</b><span>placeholder description</span></span><span class="time">00:00–00:00</span></div>
-            <div class="row"><span class="day">Jun 18</span><span class="what"><b>[ Special workshop ]</b><span>limited seats — placeholder</span></span><span class="time">00:00–00:00</span></div>
-            <div class="row"><span class="day">Jun 21</span><span class="what"><b>[ Closing ]</b><span>placeholder description</span></span><span class="time">00:00–00:00</span></div>
+            <h3>Special workshops</h3>
+            <p class="copy">Limited-seat sessions led by guest artists. Registration opens 30 min before each session.</p>
+            <ul class="specials">
+              <li>
+                <div class="sp-head"><b>Blueprint Cyanotype</b><span>Ladderice</span></div>
+                <div class="sp-times"><span>Fri Jun 12 · 19:30–20:30</span><span>Tue Jun 16 · 19:30–20:30</span><span>Fri Jun 19 · 19:30–20:30</span></div>
+                <div class="imgph sp-fig" style="aspect-ratio:1219/864">Image — Blueprint Cyanotype<small>replace with photo</small></div>
+              </li>
+              <li>
+                <div class="sp-head"><b>Off-Script Thaipography</b><span>Maan</span></div>
+                <div class="sp-times"><span>Sat Jun 13 · 10:00–11:00</span><span>Mon Jun 15 · 18:00–19:00</span><span>Thu Jun 18 · 19:30–20:30</span></div>
+                <div class="imgph sp-fig" style="aspect-ratio:1219/864">Image — Off-Script Thaipography<small>replace with photo</small></div>
+              </li>
+              <li>
+                <div class="sp-head"><b>Off-Script Copper Weaving</b><span>Teerapol</span></div>
+                <div class="sp-times"><span>Sun Jun 14 · 10:00–11:00</span><span>Wed Jun 17 · 19:30–20:30</span><span>Sat Jun 20 · 10:00–11:00</span></div>
+                <figure class="fig dark sp-fig">
+                  <img src="copper-weaving.jpg" width="1219" height="864" loading="lazy" decoding="async"
+                       alt="Copper-woven football-and-Swoosh charms: a prepared base structure, and modular knitted parts participants weave and add themselves." />
+                  <figcaption>Base structure provided · <b>modular knitted parts</b> you make &amp; add</figcaption>
+                </figure>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
