@@ -4,27 +4,27 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>ไนกี้ โกลดัง — NIKE GOAL-DANG</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<meta name="description" content="NIKE GOAL-DANG — an experimental football art house on Song Wat, Bangkok. June 11–21. Powered by Ladderice." />
+<!-- Baseline CSP (works on any static host). For HSTS / X-Frame-Options use the _headers file on Netlify/Cloudflare. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<link rel="preload" as="image" href="frames/ezgif-frame-001.jpg" fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="fonts/kimleng-800.woff2" crossorigin />
 <style>
-  /* ===== brand display font: B2 SIGN Kimleng (Thai + Latin) ===== */
-  @font-face{ font-family:"B2 Kimleng"; font-weight:300; font-style:normal;
-    src:url("fonts/B2 SIGN Kimleng Light.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:300; font-style:italic;
-    src:url("fonts/B2 SIGN Kimleng Light Italic.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:500; font-style:normal;
-    src:url("fonts/B2 SIGN Kimleng Medium.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:500; font-style:italic;
-    src:url("fonts/B2 SIGN Kimleng Medium Italic.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:700; font-style:normal;
-    src:url("fonts/B2 SIGN Kimleng Bold.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:700; font-style:italic;
-    src:url("fonts/B2 SIGN Kimleng Bold Italic.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:800; font-style:normal;
-    src:url("fonts/B2 SIGN Kimleng ExtraBold.ttf") format("truetype"); font-display:swap; }
-  @font-face{ font-family:"B2 Kimleng"; font-weight:800; font-style:italic;
-    src:url("fonts/B2 SIGN Kimleng ExtraBold Italic.ttf") format("truetype"); font-display:swap; }
+  /* ===== self-hosted fonts (subset + WOFF2) ===== */
+  /* brand display — B2 SIGN Kimleng (Thai + Latin) */
+  @font-face{ font-family:"B2 Kimleng"; font-weight:300; font-style:normal; src:url("fonts/kimleng-300.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:300; font-style:italic; src:url("fonts/kimleng-300-italic.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:500; font-style:normal; src:url("fonts/kimleng-500.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:500; font-style:italic; src:url("fonts/kimleng-500-italic.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:700; font-style:normal; src:url("fonts/kimleng-700.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:700; font-style:italic; src:url("fonts/kimleng-700-italic.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:800; font-style:normal; src:url("fonts/kimleng-800.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"B2 Kimleng"; font-weight:800; font-style:italic; src:url("fonts/kimleng-800-italic.woff2") format("woff2"); font-display:swap; }
+  /* body/labels — IBM Plex Mono (self-hosted, latin) */
+  @font-face{ font-family:"IBM Plex Mono"; font-weight:400; font-style:normal; src:url("fonts/plex-mono-400.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"IBM Plex Mono"; font-weight:500; font-style:normal; src:url("fonts/plex-mono-500.woff2") format("woff2"); font-display:swap; }
+  @font-face{ font-family:"IBM Plex Mono"; font-weight:600; font-style:normal; src:url("fonts/plex-mono-600.woff2") format("woff2"); font-display:swap; }
 
   *{ box-sizing:border-box; margin:0; padding:0; }
   /* Lock the page: the document itself never scrolls, so the mobile browser
@@ -229,7 +229,7 @@
           <h2 class="head">What is <em>ไนกี้ โกลดัง</em>?</h2>
           <div class="sub">Concept idea</div>
           <figure class="fig">
-            <img src="facade.png" width="1920" height="1080" loading="lazy" decoding="async"
+            <img src="facade.webp" width="1920" height="1080" loading="lazy" decoding="async"
                  alt="The PLAY ART HOUSE facade — a blue Song Wat shophouse with ทรงวาด โกลดัง signage and hand-woven plaid awnings on a Bangkok street." />
             <figcaption><b>PLAY ART HOUSE</b> · ทรงวาด โกลดัง — the GOAL-DANG art house on Song Wat</figcaption>
           </figure>
@@ -270,7 +270,7 @@
             <li>Parking is available in nearby Song Wat and Yaowarat parking areas.</li>
           </ul>
           <figure class="mapfig">
-            <img src="godown-fashionwalk3.png" width="1529" height="1028" loading="lazy" decoding="async"
+            <img src="godown-fashionwalk3.webp" width="1529" height="1028" loading="lazy" decoding="async"
                  alt="Map of Song Wat showing PLAY ART HOUSE and the GOAL-DANG fashion-walk stops along Song Wat Rd, by the Chao Phraya River." />
             <figcaption>Song Wat Rd · the <b>fashion-walk</b> route &amp; stops, anchored at <b>PLAY ART HOUSE</b></figcaption>
           </figure>
@@ -294,7 +294,7 @@
             <span class="tag">Protagonist piece</span>
             <h3>Copper Renew <span class="th">· โลหะหมุนเวียน</span></h3>
             <figure class="fig dark">
-              <img src="protagonist.png" width="1225" height="1667" loading="lazy" decoding="async"
+              <img src="protagonist.webp" width="1117" height="1408" loading="lazy" decoding="async"
                    alt="Copper Renew — a hand-woven scrap-copper winged armor bearing the Nike Swoosh, displayed on a black mannequin." />
               <figcaption>Copper Renew — <b>Teerapol “Jame” Sisung</b></figcaption>
             </figure>
@@ -307,7 +307,7 @@
             <span class="tag">Protagonist piece</span>
             <h3>Ladderice</h3>
             <figure class="fig">
-              <img src="ladderice-piece.jpg" width="1122" height="1402" loading="lazy" decoding="async"
+              <img src="ladderice-piece.webp" width="1122" height="1402" loading="lazy" decoding="async"
                    alt="A speed suit pieced from shredded Nike football boots and Thai silk — a patchwork of Mercurial threads, club crests and woven textile." />
               <figcaption>Prototype speed suit — <b>Ladderice</b></figcaption>
             </figure>
@@ -370,7 +370,7 @@
                 <div class="sp-head"><b>Off-Script Copper Weaving</b><span>Teerapol</span></div>
                 <div class="sp-times"><span>Sun Jun 14 · 10:00–11:00</span><span>Wed Jun 17 · 19:30–20:30</span><span>Sat Jun 20 · 10:00–11:00</span></div>
                 <figure class="fig dark sp-fig">
-                  <img src="copper-weaving.jpg" width="1219" height="864" loading="lazy" decoding="async"
+                  <img src="copper-weaving.webp" width="1490" height="1056" loading="lazy" decoding="async"
                        alt="Copper-woven football-and-Swoosh charms: a prepared base structure, and modular knitted parts participants weave and add themselves." />
                   <figcaption>Base structure provided · <b>modular knitted parts</b> you make &amp; add</figcaption>
                 </figure>
@@ -423,7 +423,7 @@
   // dimmed backdrop used to fill the side pillars on wide/desktop screens
   var bgImg = new Image(); var bgReady = false;
   bgImg.onload = function(){ bgReady = true; if (ready) drawFrame(currentFrame < 0 ? 0 : currentFrame, true); };
-  bgImg.src = "bg.jpg";
+  bgImg.src = "bg.webp";
 
   // offscreen buffer for feathering the poster's side edges
   var off = document.createElement("canvas");
@@ -542,6 +542,8 @@
     if (img && img.complete && img.naturalWidth){ drawFit(img); currentFrame = i; }
   }
 
+  // reveal as soon as enough opening frames are ready; the rest keep streaming
+  var REVEAL_AT = Math.min(FRAME_COUNT, 18);
   function preload(){
     for (var i = 0; i < FRAME_COUNT; i++){
       (function(idx){
@@ -554,7 +556,7 @@
             if (img.naturalWidth){ FRAME_W = img.naturalWidth; FRAME_H = img.naturalHeight; }
             sizeCanvas(); drawFrame(0, true);
           }
-          if (loaded === FRAME_COUNT) onReady();
+          if (loaded >= REVEAL_AT) onReady();
         };
         img.src = PATH(idx + 1);
         images[idx] = img;
@@ -563,6 +565,7 @@
   }
 
   function onReady(){
+    if (ready) return;             // run once, even though frames keep loading
     ready = true;
     loader.classList.add("hidden");
     sizeCanvas();
